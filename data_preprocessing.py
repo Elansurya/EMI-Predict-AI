@@ -14,18 +14,18 @@ class DataPreprocessor:
         self.label_encoders = {}
         self.scaler = StandardScaler()
 
-    # -----------------------------
+
     # LOAD DATA
-    # -----------------------------
+
     def load_data(self):
         print("Loading dataset...")
         self.df = pd.read_csv(self.file_path)
         print(f"Dataset loaded: {self.df.shape[0]} rows, {self.df.shape[1]} columns")
         return self.df
 
-    # -----------------------------
+   
     # CONVERT NUMERIC COLUMNS
-    # -----------------------------
+    
     def convert_numeric_columns(self):
         print("\nConverting numeric columns...")
 
@@ -45,9 +45,9 @@ class DataPreprocessor:
         print("Numeric conversion done")
         return self.df
 
-    # -----------------------------
+    
     # DATA QUALITY CHECK
-    # -----------------------------
+   
     def data_quality_check(self):
         print("\n=== Data Quality Assessment ===")
 
@@ -62,9 +62,9 @@ class DataPreprocessor:
         print("\nBasic Statistics:")
         print(self.df.describe())
 
-    # -----------------------------
+
     # HANDLE MISSING VALUES
-    # -----------------------------
+   
     def handle_missing_values(self):
         print("\nHandling missing values...")
 
@@ -77,18 +77,17 @@ class DataPreprocessor:
         print("Missing values handled")
         return self.df
 
-    # -----------------------------
+
     # REMOVE DUPLICATES
-    # -----------------------------
+  
     def remove_duplicates(self):
         before = len(self.df)
         self.df.drop_duplicates(inplace=True)
         print(f"Removed {before - len(self.df)} duplicate rows")
         return self.df
 
-    # -----------------------------
     # ENCODE CATEGORICAL FEATURES
-    # -----------------------------
+ 
     def encode_categorical_features(self):
         print("\nEncoding categorical features...")
 
@@ -105,9 +104,9 @@ class DataPreprocessor:
 
         return self.df
 
-    # -----------------------------
+ 
     # ENCODE TARGET
-    # -----------------------------
+ 
     def encode_target(self):
         if 'emi_eligibility' in self.df.columns:
             le = LabelEncoder()
@@ -115,9 +114,9 @@ class DataPreprocessor:
             self.label_encoders['emi_eligibility'] = le
         return self.df
 
-    # -----------------------------
+    
     # SPLIT DATA
-    # -----------------------------
+    
     def split_data(self):
         print("\nSplitting data...")
 
@@ -143,17 +142,16 @@ class DataPreprocessor:
 
         return X_train, X_test, y_class_train, y_class_test, y_reg_train, y_reg_test
 
-    # -----------------------------
     # SCALE FEATURES
-    # -----------------------------
+   
     def scale_features(self, X_train, X_test):
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
         return X_train_scaled, X_test_scaled
 
-    # -----------------------------
+    
     # FULL PIPELINE
-    # -----------------------------
+   
     def preprocess_pipeline(self):
         self.load_data()
         self.convert_numeric_columns()
@@ -177,10 +175,8 @@ class DataPreprocessor:
             "y_reg_test": y_reg_test
         }, self.df, self.label_encoders, self.scaler
 
-
-# ==================================================
 # MAIN EXECUTION
-# ==================================================
+
 if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     DATA_PATH = os.path.join(BASE_DIR, "data", "emi_prediction_dataset.csv")
@@ -191,3 +187,4 @@ if __name__ == "__main__":
 
     processed_df.to_csv(OUTPUT_PATH, index=False)
     print(f"\nProcessed data saved at: {OUTPUT_PATH}")
+
