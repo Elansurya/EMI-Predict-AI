@@ -11,9 +11,7 @@ import warnings
 
 warnings.filterwarnings('ignore')
 
-# =====================================================
 # CONFIGURATION
-# =====================================================
 st.set_page_config(
     page_title="EMIPredict AI",
     page_icon="💰",
@@ -26,9 +24,8 @@ MODELS_DIR = BASE_DIR / "models"
 # DATA_DIR points to parent directory based on your structure
 DATA_DIR = BASE_DIR.parent / "data"
 
-# =====================================================
 # CUSTOM CSS
-# =====================================================
+
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -165,15 +162,13 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# =====================================================
 # SESSION STATE INITIALIZATION
-# =====================================================
+
 if 'page' not in st.session_state:
     st.session_state.page = "🏠 Dashboard"
 
-# =====================================================
 # DATA LOADERS WITH ERROR HANDLING
-# =====================================================
+
 @st.cache_resource
 def load_models():
     """Load ML models with comprehensive error handling"""
@@ -279,9 +274,8 @@ clf_model, reg_model, scaler, model_status = load_models()
 df, data_status = load_data()
 feature_columns = load_feature_columns()
 
-# =====================================================
 # SIDEBAR
-# =====================================================
+
 with st.sidebar:
     st.markdown("# 💰 EMIPredict AI")
     st.markdown("### Financial Intelligence Platform")
@@ -314,9 +308,8 @@ with st.sidebar:
     st.markdown(f"**Version:** 2.0.0")
     st.markdown(f"**Updated:** {datetime.now().strftime('%b %Y')}")
 
-# =====================================================
 # PAGE: DASHBOARD
-# =====================================================
+
 if page == "🏠 Dashboard":
     st.markdown('<h1 class="main-header">💰 EMIPredict AI</h1>', unsafe_allow_html=True)
     st.markdown(f'<p style="text-align: center; font-size: 1.3rem; color: #1e293b;">Intelligent Financial Risk Assessment Platform</p>', unsafe_allow_html=True)
@@ -397,9 +390,7 @@ if page == "🏠 Dashboard":
             st.session_state.page = "🔮 Prediction"
             st.rerun()
 
-# =====================================================
 # PAGE: PREDICTION (WITH RULE-BASED FALLBACK)
-# =====================================================
 elif page == "🔮 Prediction":
     st.markdown('<h1 class="main-header">🔮 EMI Prediction Engine</h1>', unsafe_allow_html=True)
     
@@ -623,9 +614,8 @@ elif page == "🔮 Prediction":
             
             st.plotly_chart(fig, use_container_width=True)
 
-# =====================================================
 # PAGE: EDA
-# =====================================================
+
 elif page == "📊 EDA":
     st.markdown('<h1 class="main-header">📊 Exploratory Data Analysis</h1>', unsafe_allow_html=True)
     
@@ -675,9 +665,9 @@ elif page == "📊 EDA":
         else:
             st.info("No numerical columns found in dataset")
 
-# =====================================================
+
 # PAGE: PERFORMANCE
-# =====================================================
+
 elif page == "📈 Performance":
     st.markdown('<h1 class="main-header">📈 Model Performance</h1>', unsafe_allow_html=True)
     
@@ -830,9 +820,8 @@ elif page == "📈 Performance":
         }
         st.json(sample_metrics)
 
-# =====================================================
 # PAGE: DEBUG
-# =====================================================
+
 elif page == "🔧 Debug":
     st.markdown('<h1 class="main-header">🔧 Debug Information</h1>', unsafe_allow_html=True)
     
@@ -909,9 +898,8 @@ elif page == "🔧 Debug":
         status = "✅ Found" if path.exists() else "❌ Missing"
         st.text(f"{status}: {data_file}")
 
-# =====================================================
+
 # PAGE: ABOUT
-# =====================================================
 elif page == "ℹ️ About":
     st.markdown('<h1 class="main-header">ℹ️ About EMIPredict AI</h1>', unsafe_allow_html=True)
     
@@ -997,11 +985,10 @@ elif page == "ℹ️ About":
     st.markdown("---")
     st.success("🎉 Thank you for using EMIPredict AI!")
 
-# =====================================================
 # FOOTER
-# =====================================================
 st.markdown("---")
 st.markdown(
     '<p style="text-align: center; color: #64748b;">EMIPredict AI v2.0.0 | Powered by Machine Learning</p>',
     unsafe_allow_html=True
+
 )
