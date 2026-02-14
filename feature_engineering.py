@@ -39,7 +39,7 @@ class FeatureEngineer:
         # 5. Emergency Fund Coverage (months)
         self.df['emergency_fund_months'] = (
             self.df['emergency_fund'] / 
-            (total_expenses + self.df['current_emi_amount'] + 1)  # +1 to avoid division by zero
+            (total_expenses + self.df['current_emi_amount'] + 1) 
         )
         
         # 6. Liquidity Ratio
@@ -273,9 +273,8 @@ class FeatureEngineer:
         return self.df
 
 
-# =====================================================
 # MAIN EXECUTION (WINDOWS SAFE)
-# =====================================================
+
 if __name__ == "__main__":
 
     INPUT_PATH = r"C:\project\EMIPredict AI\data\processed_data.csv"
@@ -289,4 +288,5 @@ if __name__ == "__main__":
     engineered_df.to_csv(OUTPUT_PATH, index=False)
 
     print("\n📁 Engineered data saved successfully")
+
     print("📍 Location:", OUTPUT_PATH)
